@@ -1,0 +1,24 @@
+<!-- draw_matrix.html -->
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<html>
+<head>
+  <title>Foraging Task</title>
+</head>
+<body>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+  <div class="regenerate-button">
+    <button onclick="regenerateMatrix()">Regenerate</button>
+  </div>
+</body>
+</html>
+
+<audio id="audio" src="{% static 'resources_SOUNDS_error.mp3' %}"></audio>
+<script src="{% static 'script.js' %}"></script>
+
+

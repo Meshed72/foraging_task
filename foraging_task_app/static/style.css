@@ -1,0 +1,27 @@
+body {
+    background-color: black;
+  }
+  
+  canvas {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .progress-bar {
+    width: 500px;
+    height: 20px;
+    background-color: #f3f3f3;
+    margin: 10px auto;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 30s linear;
+  }
+  
+  .regenerate-button {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
