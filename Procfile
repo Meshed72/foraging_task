@@ -1,0 +1,1 @@
+web: gunicorn foraging_task.wsgi --log-file -
