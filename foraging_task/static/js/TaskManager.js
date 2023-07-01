@@ -4,8 +4,11 @@ function initTask(){
 
 class TaskManager{
     constructor(){
-        this.intervalDuration = 100;
-        this.totalDuration = 5000;
+        this.TOTAL_DURATION = 5000;
+        this.intervalDuration = 100;        
+        this.numIntervals = 100;
+        this.progressInterval;
+        this.progressWidth = 0;
         this.clickData = [];
         this.currentPatch = 1;
         this.matrixBuilder = new MatrixBuilder(this).init();
@@ -16,22 +19,31 @@ class TaskManager{
         return this;
     }
 
-    setProgressBar(){
+    setProgressBar() {
         const progressFill = document.getElementById("progressFill");
-        let progress = 0;        
-        const numIntervals = this.totalDuration / this.intervalDuration;
+        const progressBar = document.querySelector(".progress-bar");
+        this.startTime = Date.now();
+        progressFill.style.width = "0";
+        this.progressInterval = setInterval(() => this.updateProgress(progressFill, progressBar), this.intervalDuration);
+    }
 
-        function updateProgress() {            
-            progress += 100 / numIntervals;
-            progressFill.style.width = progress + "%";            
+    updateProgress(progressFill, progressBar) {
+        const elapsedTime = Date.now() - this.startTime;
+        const progressBarWidth = progressBar.offsetWidth;
+        const targetWidth = (progressBarWidth / this.TOTAL_DURATION) * elapsedTime;
 
-            if (progress < 100) {
-                console.log(progressFill.style.width);
-                setTimeout(updateProgress, this.intervalDuration);
-            } 
+        if (progressFill.offsetWidth >= progressBar.offsetWidth) {
+            progressFill.style.width = `${progressBarWidth}px`;
+            clearInterval(this.progressInterval);
+            alert("Times up");
+        } else {
+            this.progressWidth = (targetWidth / progressBarWidth) * 100;
+            progressFill.style.width = `${this.progressWidth}%`;
         }
+    }
 
-        setTimeout(updateProgress, this.intervalDuration);
+    updateClickData(data) {
+        this.clickData.push(data);
     }
 
     updateClickData(data){

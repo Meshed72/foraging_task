@@ -20,13 +20,27 @@ body {
     transition: width 30s linear;
   }
   
-  .next-patch-button {
-    text-align: center;
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
     margin-top: 10px;
   }
-
+  
+  .next-patch-button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
   .stop-experiment-button {
-    text-align: center;
-    margin-top: 10px;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
   
