@@ -20,7 +20,12 @@ body {
     transition: width 30s linear;
   }
   
-  .regenerate-button {
+  .next-patch-button {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .stop-experiment-button {
     text-align: center;
     margin-top: 10px;
   }

@@ -7,18 +7,25 @@
 <head>
   <title>Foraging Task</title>
 </head>
-<body>
+<body onload="initTask()">
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
   </div>
-  <canvas id="myCanvas" width="500" height="500"></canvas>
-  <div class="regenerate-button">
-    <button onclick="regenerateMatrix()">Regenerate</button>
+  <canvas id="matrixCanvas" width="500" height="500"></canvas>
+  <div class="next-patch-button">
+    <button onclick="taskManager.clickNextPatch()">Next Patch</button>
+  </div>
+  <br />
+  <div class="stop-experiment-button">
+    <button onclick="">Stop Experiment</button>
   </div>
 </body>
 </html>
 
-<audio id="audio" src="{% static 'resources_SOUNDS_error.mp3' %}"></audio>
-<script src="{% static 'script.js' %}"></script>
+<audio id="errorSound" src="{% static 'sounds/resources_SOUNDS_error.mp3' %}"></audio>
+{% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
+<script src="{% static 'js/TaskManager.js' %}"></script>
+<script src="{% static 'js/MatrixBuilder.js' %}"></script>
+
 
 

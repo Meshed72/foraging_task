@@ -1,4 +1,4 @@
-const canvas = document.getElementById("myCanvas");
+const canvas = document.getElementById("matrixCanvas");
 const ctx = canvas.getContext("2d");
 
 const squareSize = 20;
