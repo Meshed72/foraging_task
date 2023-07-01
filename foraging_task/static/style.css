@@ -6,17 +6,27 @@ body {
     display: block;
     margin: 0 auto;
   }
+
+  .task-text {
+    width: 500px;
+    height: 500px;
+    display: block;
+    margin: 0 auto;
+    color: white;
+    font-size: 1.875em;
+    text-align: center;
+  }
   
   .progress-bar {
     width: 500px;
     height: 20px;
-    background-color: #f3f3f3;
+    background-color: black;
     margin: 10px auto;
   }
   
   .progress-fill {
     height: 100%;
-    background-color: #4caf50;
+    background-color: rgb(255, 255, 0);
     transition: width 30s linear;
   }
   
@@ -33,9 +43,19 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }  
+  
+  .start-task-button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
   }
   
-  .stop-experiment-button {
+  .stop-task-button {
     background-color: red;
     color: white;
     padding: 10px 20px;

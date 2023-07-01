@@ -1,52 +1,95 @@
 function initTask(){
-    taskManager = new TaskManager().init();
+    taskManager = new TaskManager("testUser")
+    taskManager.init();
 }
 
 class TaskManager{
-    constructor(){
+    constructor(subjectId){
         this.TOTAL_DURATION = 5000;
+        this.subjectId = subjectId;
+        this.startTime = Date.now();
         this.intervalDuration = 100;        
         this.numIntervals = 100;
         this.progressInterval;
         this.progressWidth = 0;
         this.clickData = [];
         this.currentPatch = 1;
-        this.matrixBuilder = new MatrixBuilder(this).init();
-    }
-
-    init(){
-        this.setProgressBar();
+        this.progressBar = document.querySelector(".progress-bar");
+        this.progressFill =  document.getElementById("progressFill");
+        this.stopTaskButton =  document.querySelector(".stop-task-button");
+        this.nextPatchButton =  document.querySelector(".next-patch-button");
+        this.startTaskButton =  document.querySelector(".start-task-button");
+        this.taskText =  document.querySelector(".task-text");
+        this.matrixBuilder = new MatrixBuilder(this);
         return this;
     }
 
-    setProgressBar() {
-        const progressFill = document.getElementById("progressFill");
-        const progressBar = document.querySelector(".progress-bar");
-        this.startTime = Date.now();
-        progressFill.style.width = "0";
-        this.progressInterval = setInterval(() => this.updateProgress(progressFill, progressBar), this.intervalDuration);
+    init(){ 
+        this.taskElementsVisibility("instructions");        
     }
 
-    updateProgress(progressFill, progressBar) {
+    startTask(){
+        this.taskElementsVisibility("taskRun");
+        this.matrixBuilder.init();
+        this.setProgressBar();
+    }
+
+    endTask(){
+        this.taskElementsVisibility("taskEnd");
+    }
+
+    taskElementsVisibility(phase){
+        if(phase == "instructions"){
+            this.taskRelatedElementsVisibility("none");
+            this.taskText.style.display = "block";
+            this.taskText.innerHTML = "Instructions for the task";
+            this.startTaskButton.style.display = "block";
+        }
+        if(phase == "taskRun"){
+            this.taskRelatedElementsVisibility("block");
+            this.taskText.style.display = "none";
+            this.startTaskButton.style.display = "none";
+        }
+        if(phase == "taskEnd"){
+            this.taskRelatedElementsVisibility("none");
+            this.taskText.style.display = "block";
+            this.taskText.innerHTML = "Task finished - thank you";
+        }
+    }
+
+    taskRelatedElementsVisibility(visibility){
+        if(visibility == "block"){
+            this.matrixBuilder.showMatrix();
+        } else {
+            this.matrixBuilder.hideMatrix();
+        }
+        this.progressBar.style.display = visibility;
+        this.stopTaskButton.style.display = visibility; 
+        this.nextPatchButton.style.display = visibility;
+    }
+
+    setProgressBar() {        
+        this.progressFill.style.width = "0";
+        this.progressInterval = setInterval(() => this.updateProgress(), this.intervalDuration);
+    }
+
+    updateProgress() {
         const elapsedTime = Date.now() - this.startTime;
-        const progressBarWidth = progressBar.offsetWidth;
+        const progressBarWidth = this.progressBar.offsetWidth;
         const targetWidth = (progressBarWidth / this.TOTAL_DURATION) * elapsedTime;
 
-        if (progressFill.offsetWidth >= progressBar.offsetWidth) {
-            progressFill.style.width = `${progressBarWidth}px`;
+        if (this.progressFill.offsetWidth >= this.progressBar.offsetWidth) {
+            this.progressFill.style.width = `${progressBarWidth}px`;
             clearInterval(this.progressInterval);
-            alert("Times up");
+            // this.endTask();
         } else {
             this.progressWidth = (targetWidth / progressBarWidth) * 100;
-            progressFill.style.width = `${this.progressWidth}%`;
+            this.progressFill.style.width = `${this.progressWidth}%`;
         }
     }
 
     updateClickData(data) {
-        this.clickData.push(data);
-    }
-
-    updateClickData(data){
+        console.log(data);
         this.clickData.push(data);
     }
 
