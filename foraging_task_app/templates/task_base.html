@@ -11,8 +11,15 @@
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
   </div>
-  <canvas id="matrixCanvas" width="500" height="500"></canvas>
-  <div class="task-text">Some text</div>
+
+  <div class="task-frame">
+    <div class="task-text">Some text</div>
+    <canvas id="matrixCanvas" width="500" height="500"></canvas>
+    <div class="circle">
+      <div class="fill"></div>
+    </div>
+  </div>
+    
   <div class="buttons-container">   
     <button class="stop-task-button" onclick="taskManager.endTask()">Stop Task</button>
     <button class="start-task-button" onclick="taskManager.startTask()">Start Task</button>

@@ -1,7 +1,14 @@
 function initTask(){
+    document.querySelector('.circle').style.display = "none";
     taskManager = new TaskManager("testUser")
     taskManager.init();
 }
+
+const fillElement = document.querySelector('.fill');
+fillElement.addEventListener('animationend', () => {
+    document.querySelector('.circle').style.display = "none";
+    taskManager.matrixBuilder.showMatrix();
+});
 
 class TaskManager{
     constructor(subjectId){
@@ -32,6 +39,13 @@ class TaskManager{
         this.taskElementsVisibility("taskRun");
         this.matrixBuilder.init();
         this.setProgressBar();
+    }
+
+    clickNextPatch(){
+        document.querySelector('.circle').style.display = "block";
+        taskManager.matrixBuilder.hideMatrix();
+        this.matrixBuilder.resetSquaresColor();
+        this.currentPatch++;
     }
 
     endTask(){
@@ -91,10 +105,5 @@ class TaskManager{
     updateClickData(data) {
         console.log(data);
         this.clickData.push(data);
-    }
-
-    clickNextPatch(){
-        this.matrixBuilder.resetSquaresColor();
-        this.currentPatch++;
     }
 }
