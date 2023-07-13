@@ -12,7 +12,7 @@ fillElement.addEventListener('animationend', () => {
 
 class TaskManager{
     constructor(subjectId){
-        this.TOTAL_DURATION = 5000;
+        this.TOTAL_DURATION = TaskParams.TOTAL_DURATION * 60000;
         this.subjectId = subjectId;
         this.startTime = Date.now();
         this.intervalDuration = 100;        
@@ -28,6 +28,7 @@ class TaskManager{
         this.startTaskButton =  document.querySelector(".start-task-button");
         this.taskText =  document.querySelector(".task-text");
         this.matrixBuilder = new MatrixBuilder(this);
+        this.clickDisabled = false;
         return this;
     }
 

@@ -1,13 +1,13 @@
 class MatrixBuilder {
     constructor(taskManager) {
-      this.SQUARE_SIZE = 20;
-      this.NUM_ROWS = 25;
-      this.NUM_COLS = 25;
-      this.GREEN_PROPORTION = 0.8;
-      this.RIPE_LIMIT = 0.5;
-      this.GREEN_COLORS = ['#00FF00', '#33FF33', '#66FF66', '#99FF99', '#CCFFCC'];
-      this.RED_COLORS = ['#FF0000', '#FF3333', '#FF6666', '#FF9999', '#FFCCCC'];
-      this.RIPE_COLORS = [this.RED_COLORS[0]];
+      this.SQUARE_SIZE = TaskParams.SQUARE_SIZE;
+      this.NUM_ROWS = TaskParams.MATRIX_SIZE;
+      this.NUM_COLS = TaskParams.MATRIX_SIZE;
+      this.GREEN_PROPORTION = 1 - TaskParams.BERRIES_PROP;
+      this.RIPE_LIMIT = TaskParams.RIPE_PROP;
+      this.GREEN_COLORS = TaskParams.RED_COLORS;
+      this.RED_COLORS = TaskParams.GREEN_COLORS;
+      this.RIPE_COLORS = [this.RED_COLORS[0], this.RED_COLORS[1]];
 
       this.taskManager = taskManager;
       this.canvas = document.getElementById("matrixCanvas");
@@ -48,10 +48,15 @@ class MatrixBuilder {
     //   return `hsl(${greenHue}, ${saturation}%, ${lightness}%)`;
     }
   
-    getRandomRedColor() {
-        const randomIndex = Math.floor(Math.random() * this.RED_COLORS.length);
-        return this.RED_COLORS[randomIndex];
-
+    getRandomRedColor(isRipe) {
+      if (isRipe) {
+        const randomIndex = Math.floor(Math.random() * this.RIPE_COLORS.length);
+        return this.RIPE_COLORS[randomIndex];
+      }
+  
+      const randomIndex = Math.floor(Math.random() * this.RED_COLORS.length);
+      return this.RED_COLORS[randomIndex];
+        
         // let redHue;
         // if (Math.random() < this.RIPE_LIMIT) {
         //   redHue = Math.floor(Math.random() * 51) + 150;
@@ -66,19 +71,31 @@ class MatrixBuilder {
     drawMatrix(setEventListeners) {
         const totalSquares = this.NUM_ROWS * this.NUM_COLS;
         const numGreenSquares = Math.floor(totalSquares * this.GREEN_PROPORTION);
+        const numRedSquares = Math.floor(totalSquares - numGreenSquares);
+        const ripeLimitIndex = Math.floor(this.RIPE_LIMIT * numRedSquares);
       
         // Create an array of indices representing all squares
-        const indices = Array.from({ length: totalSquares }, (_, index) => index);
+        const squareIndices = Array.from({ length: totalSquares }, (_, index) => index);
       
         // Shuffle the indices array randomly
-        for (let i = indices.length - 1; i > 0; i--) {
+        for (let i = squareIndices.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
-          [indices[i], indices[j]] = [indices[j], indices[i]];
+          [squareIndices[i], squareIndices[j]] = [squareIndices[j], squareIndices[i]];
         }
+
+        // Create an array of indices representing all red colors
+        var redIndices = Array.from({ length: numRedSquares}, (_, index) => index);
+      
+        // Shuffle the indices array randomly
+        for (let i = redIndices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [redIndices[i], redIndices[j]] = [redIndices[j], redIndices[i]];
+        }        
 
         this.squares = [];
       
         // Assign colors to squares based on shuffled indices
+        var redIndex = 0;
         for (let i = 0; i < totalSquares; i++) {
           const row = Math.floor(i / this.NUM_COLS);
           const col = i % this.NUM_COLS;
@@ -86,11 +103,17 @@ class MatrixBuilder {
           const y = (this.canvasHeight - (this.SQUARE_SIZE * this.NUM_ROWS)) / 2 + row * this.SQUARE_SIZE;          
           var color;
           var colorType;
-          if(indices[i] < numGreenSquares){
+
+          if(squareIndices[i] < numGreenSquares){
             color = this.getRandomGreenColor();  
             colorType = "green";          
           } else {
-            color = this.getRandomRedColor()
+            redIndex++;
+            if(redIndices[redIndex] < ripeLimitIndex){
+              color = this.getRandomRedColor(true);
+            } else {
+              color = this.getRandomRedColor(false);
+            }        
             colorType = "red";
           }
       
@@ -133,6 +156,13 @@ class MatrixBuilder {
       const ripeColors = this.RIPE_COLORS;
   
       canvas.addEventListener("click", function (event) {
+        if(taskManager.clickDisabled){
+          return;
+        }
+
+        taskManager.clickDisabled = true;
+        setTimeout(function(){taskManager.clickDisabled = false;}, TaskParams.PICK_DELAY);
+
         var rect = canvas.getBoundingClientRect();
         var clickX = event.clientX - rect.left;
         var clickY = event.clientY - rect.top;
