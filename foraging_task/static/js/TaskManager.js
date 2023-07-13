@@ -51,6 +51,7 @@ class TaskManager{
 
     endTask(){
         this.taskElementsVisibility("taskEnd");
+        this.reportTaskData();
     }
 
     taskElementsVisibility(phase){
@@ -106,5 +107,19 @@ class TaskManager{
     updateClickData(data) {
         console.log(data);
         this.clickData.push(data);
+    }
+
+    reportTaskData(){
+        var xhr = new XMLHttpRequest();
+        var url = "/report_task_data";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {                
+                console.log("Data sent");
+            }
+        };
+        var data = JSON.stringify({"click_data" : this.clickData, "subject_data" : {"subject_id" : this.subjectId, "start_time" : this.startTime}});
+        xhr.send(data); 
     }
 }

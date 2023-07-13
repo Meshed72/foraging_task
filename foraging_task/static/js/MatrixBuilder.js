@@ -185,8 +185,7 @@ class MatrixBuilder {
             ctx.fillRect(square.x, square.y, square.size, square.size);
     
             // Update click data
-            taskManager.updateClickData({ subjectID : taskManager.subjectID, 
-                startTime : taskManager.startTime, 
+            taskManager.updateClickData({ subjectId : taskManager.subjectId, 
                 clickTime : Date.now(), 
                 patchNumber : taskManager.currentPatch, 
                 x: square.x, 
