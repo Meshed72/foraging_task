@@ -77,6 +77,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foraging_task.wsgi.application'
 
+print("******************************")
+print(config('DB_ENGINE'))
+print(config('DB_USER'))
+print("******************************")
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -93,19 +97,20 @@ DATABASES = {
         }
     }
 
-# if config('DEVELOP_ENV', cast=bool):
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': config('DB_ENGINE'),
-#             'NAME': config('DB_NAME'),
-#             'USER': config('DB_USER'),
-#             'PASSWORD': config('DB_PASSWORD'),
-#             'PORT': config('DB_PORT'),
-#             'HOST': config('DB_HOST'),
-#             'CONN_MAX_AGE': 500,
-#             'AUTOCOMMIT': True,
-#         }
-#     }
+if config('DEVELOP_ENV', cast=bool):
+    print("!!!!!!!!!!!!!!!!!!!!!!!")
+    DATABASES = {
+        'default': {
+            'ENGINE': config('DB_ENGINE'),
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'PORT': config('DB_PORT'),
+            'HOST': config('DB_HOST'),
+            'CONN_MAX_AGE': 500,
+            'AUTOCOMMIT': True,
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
