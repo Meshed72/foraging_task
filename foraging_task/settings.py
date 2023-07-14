@@ -30,7 +30,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['foraging-task-0e312fb63656.herokuapp.com','127.0.0.1','localhost']
+# ALLOWED_HOSTS = ['foraging-task-0e312fb63656.herokuapp.com','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
