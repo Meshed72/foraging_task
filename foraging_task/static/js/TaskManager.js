@@ -27,6 +27,7 @@ class TaskManager{
         this.nextPatchButton =  document.querySelector(".next-patch-button");
         this.startTaskButton =  document.querySelector(".start-task-button");
         this.taskText =  document.querySelector(".task-text");
+        this.travelCircle =  document.querySelector(".circle");
         this.matrixBuilder = new MatrixBuilder(this);
         this.clickDisabled = false;
         return this;
@@ -69,6 +70,7 @@ class TaskManager{
         if(phase == "taskEnd"){
             this.taskRelatedElementsVisibility("none");
             this.taskText.style.display = "block";
+            this.travelCircle.style.display = "none";
             this.taskText.innerHTML = "Task finished - thank you";
         }
     }
@@ -81,7 +83,7 @@ class TaskManager{
         }
         this.progressBar.style.display = visibility;
         this.stopTaskButton.style.display = visibility; 
-        this.nextPatchButton.style.display = visibility;
+        this.nextPatchButton.style.display = visibility;        
     }
 
     setProgressBar() {        
@@ -97,7 +99,7 @@ class TaskManager{
         if (this.progressFill.offsetWidth >= this.progressBar.offsetWidth) {
             this.progressFill.style.width = `${progressBarWidth}px`;
             clearInterval(this.progressInterval);
-            // this.endTask();
+            this.endTask();
         } else {
             this.progressWidth = (targetWidth / progressBarWidth) * 100;
             this.progressFill.style.width = `${this.progressWidth}%`;
