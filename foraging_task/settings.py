@@ -25,12 +25,12 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lpo7hp1_i-1i&sdzc0j=6=m+to%tye$8_6u&bo1ce_!a6w62f+'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['foraging-task-0e312fb63656.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['foraging-task-0e312fb63656.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
