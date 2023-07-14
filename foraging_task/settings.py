@@ -80,31 +80,31 @@ WSGI_APPLICATION = 'foraging_task.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': config('DB_ENGINE'),
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'PORT': config('DB_PORT'),
-#         'HOST': config('DB_HOST'),
-#         'CONN_MAX_AGE': 500,
-#         'AUTOCOMMIT': True,
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': "django.db.backends.mysql",
-        'NAME': "xfsuax7o44p2nqow",
-        'USER': "nrtoarmmkcqzy1za",
-        'PASSWORD': "s1qx020u1l9uaj17",
-        'PORT': "3306",
-        'HOST': "n2o93bb1bwmn0zle.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'PORT': config('DB_PORT'),
+        'HOST': config('DB_HOST'),
         'CONN_MAX_AGE': 500,
         'AUTOCOMMIT': True,
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': "django.db.backends.mysql",
+#         'NAME': "xfsuax7o44p2nqow",
+#         'USER': "nrtoarmmkcqzy1za",
+#         'PASSWORD': "s1qx020u1l9uaj17",
+#         'PORT': "3306",
+#         'HOST': "n2o93bb1bwmn0zle.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+#         'CONN_MAX_AGE': 500,
+#         'AUTOCOMMIT': True,
+#     }
+# }
 
 
 # Password validation
