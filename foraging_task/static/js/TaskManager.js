@@ -31,6 +31,7 @@ class TaskManager{
         this.travelCircle =  document.querySelector(".circle");
         this.matrixBuilder = new MatrixBuilder(this);
         this.clickDisabled = false;
+        this.isValid = false;
         return this;
     }
 
@@ -98,6 +99,7 @@ class TaskManager{
         if (this.progressFill.offsetWidth >= this.progressBar.offsetWidth) {
             this.progressFill.style.width = `${progressBarWidth}px`;
             clearInterval(this.progressInterval);
+            this.isValid = true;
             this.endTask();
         } else {
             this.progressWidth = (targetWidth / progressBarWidth) * 100;
@@ -120,7 +122,8 @@ class TaskManager{
                 console.log("Data sent");
             }
         };
-        var data = JSON.stringify({"click_data" : this.clickData, "subject_data" : {"subject_id" : this.subjectId, "start_time" : this.startTime}});
+
+        var data = JSON.stringify({"click_data" : this.clickData, "subject_data" : {"subject_id" : this.subjectId, "start_time" : this.startTime, "is_valid" : this.isValid}});
         xhr.send(data); 
     }
 }
