@@ -14,8 +14,8 @@ body {
     height: 75vh;   
   }
 
-  .task-text {
-    width: 500px;
+  .instructions-text {
+    width: 1000px;
     height: 500px;
     display: block;
     margin: 0 auto;
@@ -23,6 +23,19 @@ body {
     font-size: 1.875em;
     text-align: center;
     display: none;
+    text-align: left;
+  }
+
+  .end-text {
+    width: 1000px;
+    height: 500px;
+    display: block;
+    margin: 0 auto;
+    color: white;
+    font-size: 1.875em;
+    text-align: center;
+    display: none;
+    text-align: center;
   }
   
   .progress-bar {

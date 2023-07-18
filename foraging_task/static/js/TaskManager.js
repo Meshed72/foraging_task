@@ -26,7 +26,8 @@ class TaskManager{
         this.stopTaskButton =  document.querySelector(".stop-task-button");
         this.nextPatchButton =  document.querySelector(".next-patch-button");
         this.startTaskButton =  document.querySelector(".start-task-button");
-        this.taskText =  document.querySelector(".task-text");
+        this.instructionsText =  document.querySelector(".instructions-text");
+        this.endText =  document.querySelector(".end-text");
         this.travelCircle =  document.querySelector(".circle");
         this.matrixBuilder = new MatrixBuilder(this);
         this.clickDisabled = false;
@@ -58,20 +59,18 @@ class TaskManager{
     taskElementsVisibility(phase){
         if(phase == "instructions"){
             this.taskRelatedElementsVisibility("none");
-            this.taskText.style.display = "block";
-            this.taskText.innerHTML = "Instructions for the task";
+            this.instructionsText.style.display = "block";
             this.startTaskButton.style.display = "block";
         }
         if(phase == "taskRun"){
             this.taskRelatedElementsVisibility("block");
-            this.taskText.style.display = "none";
+            this.instructionsText.style.display = "none";
             this.startTaskButton.style.display = "none";
         }
         if(phase == "taskEnd"){
             this.taskRelatedElementsVisibility("none");
-            this.taskText.style.display = "block";
+            this.endText.style.display = "block";
             this.travelCircle.style.display = "none";
-            this.taskText.innerHTML = "Task finished - thank you";
         }
     }
 

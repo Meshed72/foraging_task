@@ -7,7 +7,7 @@ class MatrixBuilder {
       this.RIPE_LIMIT = TaskParams.RIPE_PROP;
       this.GREEN_COLORS = TaskParams.RED_COLORS;
       this.RED_COLORS = TaskParams.GREEN_COLORS;
-      this.RIPE_COLORS = [this.RED_COLORS[0], this.RED_COLORS[1]];
+      this.RIPE_COLORS = [this.RED_COLORS[0], this.RED_COLORS[1], this.RED_COLORS[2]];
 
       this.taskManager = taskManager;
       this.canvas = document.getElementById("matrixCanvas");
@@ -195,8 +195,10 @@ class MatrixBuilder {
         });
   
         // Play sound
-        if(!isRipe){
-            document.getElementById("errorSound").play();
+        if(isRipe){
+          document.getElementById("correctSound").play();        
+        } else {
+          document.getElementById("errorSound").play();
         }        
       });
     }

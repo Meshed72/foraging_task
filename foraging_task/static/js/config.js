@@ -1,20 +1,20 @@
 const TaskParams = {
 	MATRIX_SIZE: 20,
 	GREEN_COLORS:[
-        "#FF4040",
-        "#FF4D4D",
-        "#FF5959",
-        "#FF6666",
-        "#FF7373",
-        "#FF8080"
+        "#FF0000",
+        "#EF0000",
+        "#DF0000",
+        "#CF0000",
+        "#BF0000",
+        "#BF0000"
       ],
 	RED_COLORS: [
-        "#4AA54A",
-        "#56B156",
-        "#62BD62",
-        "#6EC96E",
-        "#7AD57A",
-        "#86E086"
+        "#BF0000",
+        "#BF0000",
+        "#00DF00",
+        "#00CF00",
+        "#00BF00",
+        "#00AF00"
       ],
 	SQUARE_SIZE: 20, // pixels
 	BERRIES_PROP: 0.1, // Proportion of berries out of total squares
