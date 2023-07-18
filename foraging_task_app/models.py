@@ -4,6 +4,7 @@ from django.db import models
 class Subjects(models.Model):
     subject_id = models.CharField(max_length=30)
     start_time = models.BigIntegerField(default='NA')
+    is_valid = models.BooleanField(default='False')
     
     class Meta:
         db_table  = 'subjects'
