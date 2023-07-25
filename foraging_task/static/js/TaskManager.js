@@ -12,10 +12,10 @@ fillElement.addEventListener('animationend', () => {
 
 class TaskManager{
     constructor(subjectId){
-        this.TOTAL_DURATION = TaskParams.TOTAL_DURATION * 60000;
+        this.TOTAL_DURATION = TaskParams.TOTAL_DURATION * 600000;
         this.subjectId = subjectId;
         this.startTime = Date.now();
-        this.intervalDuration = 100;        
+        this.travelDuration = 100;        
         this.numIntervals = 100;
         this.progressInterval;
         this.progressWidth = 0;
@@ -31,7 +31,8 @@ class TaskManager{
         this.travelCircle =  document.querySelector(".circle");
         this.matrixBuilder = new MatrixBuilder(this);
         this.clickDisabled = false;
-        this.isValid = false;
+        this.elapsedTime;
+        this.isValid = 0;
         return this;
     }
 
@@ -88,18 +89,19 @@ class TaskManager{
 
     setProgressBar() {        
         this.progressFill.style.width = "0";
-        this.progressInterval = setInterval(() => this.updateProgress(), this.intervalDuration);
+        this.progressInterval = setInterval(() => this.updateProgress(), this.travelDuration);
     }
 
     updateProgress() {
-        const elapsedTime = Date.now() - this.startTime;
+        this.elapsedTime = Date.now() - this.startTime;
         const progressBarWidth = this.progressBar.offsetWidth;
-        const targetWidth = (progressBarWidth / this.TOTAL_DURATION) * elapsedTime;
+        const targetWidth = (progressBarWidth / this.TOTAL_DURATION) * this.elapsedTime;
 
-        if (this.progressFill.offsetWidth >= this.progressBar.offsetWidth) {
+        // if (this.progressFill.offsetWidth >= this.progressBar.offsetWidth) {
+        if (this.elapsedTime >= this.TOTAL_DURATION) {
             this.progressFill.style.width = `${progressBarWidth}px`;
             clearInterval(this.progressInterval);
-            this.isValid = true;
+            this.isValid = 1;
             this.endTask();
         } else {
             this.progressWidth = (targetWidth / progressBarWidth) * 100;

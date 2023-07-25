@@ -110,7 +110,7 @@ body {
     left: 0;
     transform-origin: center center;
     animation-name: fillCircle;
-    animation-duration: 15s;
+    animation-duration: 10s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
     margin: 0 auto;

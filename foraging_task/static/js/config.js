@@ -6,11 +6,11 @@ const TaskParams = {
         "#DF0000",
         "#CF0000",
         "#BF0000",
-        "#BF0000"
+        "#AF0000"
       ],
 	RED_COLORS: [
-        "#BF0000",
-        "#BF0000",
+        "#00FF00",
+        "#00EF00",
         "#00DF00",
         "#00CF00",
         "#00BF00",
@@ -20,6 +20,6 @@ const TaskParams = {
 	BERRIES_PROP: 0.1, // Proportion of berries out of total squares
 	RIPE_PROP: 0.5, // Proportion of ripe berries out of total berries
 	PICK_DELAY: 100, // ms 
-	TRAVEL_TIME: 15, // seconds
-	TOTAL_DURATION: 15 // minutes
+	// TRAVEL_TIME: 10, // seconds - shouldd be configured in css file
+	TOTAL_DURATION: 10 // minutes
 }

@@ -167,6 +167,7 @@ class MatrixBuilder {
         var clickX = event.clientX - rect.left;
         var clickY = event.clientY - rect.top;
         var isRipe = false;
+        var squareColor;
   
         squares.forEach((square) => {
           if (
@@ -176,11 +177,16 @@ class MatrixBuilder {
             clickY < square.y + square.size
           ) {
 
+            squareColor = square.color;
+
             if(ripeColors.includes(square.color)){
                 isRipe = true;
             }
             
-            square.color = matrixBuilder.getRandomGreenColor();        
+            if(matrixBuilder.RED_COLORS.includes(squareColor)){
+              square.color = matrixBuilder.getRandomGreenColor();        
+            }
+            
             ctx.fillStyle = square.color;
             ctx.fillRect(square.x, square.y, square.size, square.size);
     
@@ -195,11 +201,13 @@ class MatrixBuilder {
         });
   
         // Play sound
-        if(isRipe){
+        if(isRipe && matrixBuilder.RED_COLORS.includes(squareColor)){
           document.getElementById("correctSound").play();        
-        } else {
+        } else if(!isRipe && matrixBuilder.RED_COLORS.includes(squareColor)) {
           document.getElementById("errorSound").play();
-        }        
+        } else {
+          document.getElementById("neutralSound").play();
+        }       
       });
     }
   }

@@ -19,7 +19,7 @@
       <br />
       You want to pick as many ripe "berries" as you can, as fast as you can.<p />
       Bright red squares are ripe, dimmer red squares are unripe and not good.<p />
-      You have 15 minutes for the task. When you want to move to the next patch click on the "next patch" button in the lower right corner of the screen. The transition from one patch to another takes 15 seconds. The yellow bar at the top of the screen marks the time that has elapsed out of the 10 minutes allowed to complete the task.<p />
+      You have 10 minutes for the task. When you want to move to the next patch click on the "next patch" button in the lower right corner of the screen. The transition from one patch to another takes 10 seconds. The yellow bar at the top of the screen marks the time that has elapsed out of the 10 minutes allowed to complete the task.<p />
       Remember, your task is to pick as many ripe "berries" as possible!
     </div>
     <div class="end-text">
@@ -44,6 +44,7 @@
 
 <audio id="errorSound" src="{% static 'sounds/error.mp3' %}"></audio>
 <audio id="correctSound" src="{% static 'sounds/correct.wav' %}"></audio>
+<audio id="neutralSound" src="{% static 'sounds/neutral.wav' %}"></audio>
 {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
 <script src="{% static 'js/config.js' %}"></script>
 <script src="{% static 'js/TaskManager.js' %}"></script>
