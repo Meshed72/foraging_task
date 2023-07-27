@@ -1,0 +1,59 @@
+<!-- questionnaire_form.html -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/questionnaire.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questionnaire Form</title>
+</head>
+<body>
+    <h1>Questionnaire Form</h1>
+    <p>    
+    The following statements refer to experiences that many people have in their everyday lives. Circle
+    the number that best describes HOW MUCH that experience has DISTRESSED or BOTHERED you
+    during the PAST MONTH. The numbers refer to the following verbal labels:
+    <br />
+    <br />
+    0 = Not at all<br />
+    1 = A little<br />
+    2 = Moderately<br />
+    3 = A lot<br />
+    4 = Extremely<br />
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <table>            
+            {% for field in form %}
+            <tr class="form-group">
+                <td>
+                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label><br>
+                </td>
+                <td>    
+                    {% for radio in field %}
+                        {{ radio }}
+                        <label for="{{ radio.id_for_label }}">{{ radio.choice.data.value }}</label>
+                    {% endfor %}
+                </td>    
+            </tr>    
+            {% endfor %}        
+        </table>
+        </p>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Set all radio boxes to have no value selected
+        const radioBoxes = document.querySelectorAll('input[type="radio"]');
+        radioBoxes.forEach(radio => {
+            radio.checked = false;
+            radio.addEventListener('click', (event) => {
+                const item = event.target.name;
+                const value = event.target.value;    
+                // Update the value of the clicked radio button
+                document.querySelector(`input[name="${item}"][value="${value}"]`).checked = true;            
+            });
+        });
+    </script>
+</body>
+</html>

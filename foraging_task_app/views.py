@@ -4,13 +4,27 @@ from django.http import JsonResponse
 import json
 from .models import Task_clicks, Subjects
 import pdb
+from .forms import Oci_questionnaire_form
+
+def questionnaire_form(request):
+    if request.method == 'POST':
+        form = Oci_questionnaire_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'questionnaire_form.html', {'form': form})
+            return JsonResponse({"sss": "sss"})
+    else:
+        form = Oci_questionnaire_form()
+
+    return render(request, 'questionnaire_form.html', {'form': form})
+
 
 def task_base(request):
     return render(request, 'task_base.html')
 
 @csrf_exempt
 def report_task_data(request):    
-    # todo when running on prod, make sure no data is inserted  in case the task is over and the subject id already exists
+    # todo when running on prod, make sure no data is inserted in case the task is over and the subject id already exists
     subject_data = json.loads(request.body)["subject_data"]
     # pdb.set_trace()
     s = Subjects(subject_id=subject_data["subject_id"],
