@@ -1,0 +1,38 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/welcome.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment</title>
+</head>
+<body onload="initExperimentManager()">
+    <h1>Welcome</h1>
+    <div class="instructions">
+        <p>
+            This experiment involves to parts:
+            <br/>
+            1) Filling out 1 questionnaire.
+            <br/>
+            2) Completeing a visual task.
+            <br/>
+            <br/>
+            Instructions for each part will be given.
+            <br/>
+            Click "Start" in order to start the experiment. After you finish each part, click "Next" to continue.
+        </p>
+    </div>
+    <br />    
+    <div>
+        <button class="next-button" onclick="goToQuestionnaire()">Next</button>
+    </div>
+
+    <script>
+        function goToQuestionnaire(){
+            window.location.href = "{% url 'questionnaire_form' %}"
+        }
+    </script>
+</body>
+</html>
+
+<script src="{% static 'js/ExperimentManager.js' %}"></script>

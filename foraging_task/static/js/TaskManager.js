@@ -1,6 +1,6 @@
 function initTask(){
     document.querySelector('.circle').style.display = "none";
-    taskManager = new TaskManager("testUser")
+    taskManager = new TaskManager(ExperimentManager.prolificData)
     taskManager.init();
 }
 
@@ -11,9 +11,9 @@ fillElement.addEventListener('animationend', () => {
 });
 
 class TaskManager{
-    constructor(subjectId){
+    constructor(prolificData){
         this.TOTAL_DURATION = TaskParams.TOTAL_DURATION * 600000;
-        this.subjectId = subjectId;
+        this.subjectId = prolificData["PROLIFIC_PID"];
         this.startTime = Date.now();
         this.travelDuration = 100;        
         this.numIntervals = 100;
@@ -125,7 +125,10 @@ class TaskManager{
             }
         };
 
-        var data = JSON.stringify({"click_data" : this.clickData, "subject_data" : {"subject_id" : this.subjectId, "start_time" : this.startTime, "is_valid" : this.isValid}});
+        subjectData = {"subject_id" : this.subjectId, "start_time" : this.startTime, "is_valid" : this.isValid,
+        "study_id" : prolificData["STUDY_ID"], "session_id" : prolificData["SESSION_ID"],};
+
+        var data = JSON.stringify({"click_data" : this.clickData, "subject_data" : subjectData});
         xhr.send(data); 
     }
 }

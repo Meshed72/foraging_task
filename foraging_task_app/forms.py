@@ -20,4 +20,5 @@ class Oci_questionnaire_form(forms.ModelForm):
             elif field_name =='subject_id':
                 field.widget = forms.HiddenInput()
                 field.label = ""
+                field.initial="defaultUser"
                 field.required = True

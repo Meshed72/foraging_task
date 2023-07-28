@@ -3,6 +3,8 @@ from django.db import models
 
 class Subjects(models.Model):
     subject_id = models.CharField(max_length=30)
+    study_id = models.CharField(max_length=30, default='NA')
+    session_id = models.CharField(max_length=30, default='NA')
     start_time = models.BigIntegerField(default='NA')
     is_valid = models.BooleanField(default='False')
     
@@ -46,11 +48,11 @@ class Oci_questionnaire(models.Model):
     }
     
     STATEMENT_CHOICES = (
-        (0, "Not at all"),
-        (1, "A little"),
-        (2, "Moderately"),
-        (3, "A lot"),
-        (4, "Extremely"),
+        (0, "0"),
+        (1, "1"),
+        (2, "2"),
+        (3, "3"),
+        (4, "4"),
     )
 
     subject_id = models.CharField(max_length=50)

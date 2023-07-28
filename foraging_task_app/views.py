@@ -1,34 +1,39 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect
 import json
 from .models import Task_clicks, Subjects
 import pdb
 from .forms import Oci_questionnaire_form
 
+def welcome_screen(request):
+    return render(request, 'welcome_screen.html')
+
 def questionnaire_form(request):
-    if request.method == 'POST':
-        form = Oci_questionnaire_form(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'questionnaire_form.html', {'form': form})
-            return JsonResponse({"sss": "sss"})
+    form = Oci_questionnaire_form(request.POST)    
+    if request.method == 'POST':             
+            if form.is_valid():
+                form.save()            
+                return HttpResponseRedirect('/foraging_task')
     else:
         form = Oci_questionnaire_form()
 
-    return render(request, 'questionnaire_form.html', {'form': form})
+    return render(request, 'oci_form.html', {'form': form})
 
 
-def task_base(request):
-    return render(request, 'task_base.html')
+def foraging_task(request):
+    return render(request, 'foraging_task.html')
 
 @csrf_exempt
 def report_task_data(request):    
     # todo when running on prod, make sure no data is inserted in case the task is over and the subject id already exists
     subject_data = json.loads(request.body)["subject_data"]
     # pdb.set_trace()
-    s = Subjects(subject_id=subject_data["subject_id"],
+    s = Subjects(subject_id=subject_data["prolific_pid"],
                  start_time=subject_data["start_time"],
+                 study_id=subject_data["study_id"],
+                 session_id=subject_data["session_id"],
                  is_valid=subject_data["is_valid"])
     s.save()
     
