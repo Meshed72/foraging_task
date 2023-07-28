@@ -27,6 +27,7 @@ class TaskManager{
         this.nextPatchButton =  document.querySelector(".next-patch-button");
         this.startTaskButton =  document.querySelector(".start-task-button");
         this.instructionsText =  document.querySelector(".instructions-text");
+        this.instructionsImg =  document.querySelector("[alt='Instructions Image']");
         this.endText =  document.querySelector(".end-text");
         this.travelCircle =  document.querySelector(".circle");
         this.matrixBuilder = new MatrixBuilder(this);
@@ -66,6 +67,7 @@ class TaskManager{
         }
         if(phase == "taskRun"){
             this.taskRelatedElementsVisibility("block");
+            this.instructionsImg.style.display = "none";
             this.instructionsText.style.display = "none";
             this.startTaskButton.style.display = "none";
         }
