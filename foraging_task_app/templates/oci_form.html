@@ -45,7 +45,7 @@
     </form>
 
     <script>
-        document.querySelector("#subject_id").value = experimentManager.prolificData["PROLIFIC_PID"];
+        document.querySelector("[name=subject_id]").value = sessionStorage.getItem("PROLIFIC_PID");
 
         // Set all radio boxes to have no value selected
         const radioBoxes = document.querySelectorAll('input[type="radio"]');

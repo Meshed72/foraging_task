@@ -29,8 +29,7 @@ def foraging_task(request):
 def report_task_data(request):    
     # todo when running on prod, make sure no data is inserted in case the task is over and the subject id already exists
     subject_data = json.loads(request.body)["subject_data"]
-    # pdb.set_trace()
-    s = Subjects(subject_id=subject_data["prolific_pid"],
+    s = Subjects(subject_id=subject_data["subject_id"],
                  start_time=subject_data["start_time"],
                  study_id=subject_data["study_id"],
                  session_id=subject_data["session_id"],
