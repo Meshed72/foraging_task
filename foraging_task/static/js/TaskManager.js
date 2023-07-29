@@ -1,18 +1,6 @@
-function initTask(){
-    document.querySelector('.circle').style.display = "none";
-    taskManager = new TaskManager()
-    taskManager.init();
-}
-
-const fillElement = document.querySelector('.fill');
-fillElement.addEventListener('animationend', () => {
-    document.querySelector('.circle').style.display = "none";
-    taskManager.matrixBuilder.showMatrix();
-});
-
 class TaskManager{
     constructor(){
-        this.TOTAL_DURATION = TaskParams.TOTAL_DURATION * 600000;
+        this.TOTAL_DURATION = TaskParams.TOTAL_DURATION * 1000;
         this.subjectId = sessionStorage.getItem("PROLIFIC_PID");
         this.startTime = Date.now();
         this.travelDuration = 100;        
@@ -23,7 +11,7 @@ class TaskManager{
         this.currentPatch = 1;
         this.progressBar = document.querySelector(".progress-bar");
         this.progressFill =  document.getElementById("progressFill");
-        this.stopTaskButton =  document.querySelector(".stop-task-button");
+        // this.stopTaskButton =  document.querySelector(".stop-task-button");
         this.nextPatchButton =  document.querySelector(".next-patch-button");
         this.startTaskButton =  document.querySelector(".start-task-button");
         this.instructionsText =  document.querySelector(".instructions-text");
@@ -34,6 +22,17 @@ class TaskManager{
         this.clickDisabled = false;
         this.elapsedTime;
         this.isValid = 0;
+        this.currentFillWidth = 0;
+        this.fillWidthSpeedFactor = 0.01;
+
+        //"Travel" animation
+        const fillElement = document.querySelector('.fill');
+        fillElement.addEventListener('animationend', () => {
+            document.querySelector('.circle').style.display = "none";
+            taskManager.matrixBuilder.showMatrix();
+            this.nextPatchButton.style.display = "block";
+        });
+
         return this;
     }
 
@@ -50,6 +49,7 @@ class TaskManager{
     clickNextPatch(){
         document.querySelector('.circle').style.display = "block";
         taskManager.matrixBuilder.hideMatrix();
+        this.nextPatchButton.style.display = "none";
         this.matrixBuilder.resetSquaresColor();
         this.currentPatch++;
     }
@@ -85,29 +85,29 @@ class TaskManager{
             this.matrixBuilder.hideMatrix();
         }
         this.progressBar.style.display = visibility;
-        this.stopTaskButton.style.display = visibility; 
+        // this.stopTaskButton.style.display = visibility; 
         this.nextPatchButton.style.display = visibility;        
     }
 
     setProgressBar() {        
         this.progressFill.style.width = "0";
-        this.progressInterval = setInterval(() => this.updateProgress(), this.travelDuration);
+        this.progressInterval = setInterval(() => this.updateProgress(), 1000 * this.fillWidthSpeedFactor);
     }
 
     updateProgress() {
         this.elapsedTime = Date.now() - this.startTime;
         const progressBarWidth = this.progressBar.offsetWidth;
-        const targetWidth = (progressBarWidth / this.TOTAL_DURATION) * this.elapsedTime;
+        const fillRatio = 1000 * this.fillWidthSpeedFactor / this.TOTAL_DURATION;
+        const fillWidthUnit = fillRatio * progressBarWidth;
 
-        // if (this.progressFill.offsetWidth >= this.progressBar.offsetWidth) {
         if (this.elapsedTime >= this.TOTAL_DURATION) {
-            this.progressFill.style.width = `${progressBarWidth}px`;
             clearInterval(this.progressInterval);
-            this.isValid = 1;
+            this.progressFill.style.width = `${progressBarWidth}px`;            
+            this.isValid = 1;            
             this.endTask();
         } else {
-            this.progressWidth = (targetWidth / progressBarWidth) * 100;
-            this.progressFill.style.width = `${this.progressWidth}%`;
+            this.currentFillWidth  += fillWidthUnit;
+            this.progressFill.style.width = `${this.currentFillWidth}px`;
         }
     }
 

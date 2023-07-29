@@ -37,11 +37,19 @@
   </div>
     
   <div class="buttons-container">   
-    <button class="stop-task-button" onclick="taskManager.endTask()">Stop Task</button>
+    {% comment %} <button class="stop-task-button" onclick="taskManager.endTask()">Stop Task</button> {% endcomment %}
     <button class="next-patch-button" onclick="taskManager.clickNextPatch()">Next Patch</button>
   </div>
 </body>
 </html>
+
+<script>
+  function initTask(){
+    document.querySelector('.circle').style.display = "none";
+    taskManager = new TaskManager()
+    taskManager.init();
+  }
+</script>
 
 <audio id="errorSound" src="{% static 'sounds/error.mp3' %}"></audio>
 <audio id="correctSound" src="{% static 'sounds/correct.wav' %}"></audio>

@@ -5,8 +5,8 @@ class MatrixBuilder {
       this.NUM_COLS = TaskParams.MATRIX_SIZE;
       this.GREEN_PROPORTION = 1 - TaskParams.BERRIES_PROP;
       this.RIPE_LIMIT = TaskParams.RIPE_PROP;
-      this.GREEN_COLORS = TaskParams.RED_COLORS;
-      this.RED_COLORS = TaskParams.GREEN_COLORS;
+      this.GREEN_COLORS = TaskParams.GREEN_COLORS;
+      this.RED_COLORS = TaskParams.RED_COLORS;
       this.RIPE_COLORS = [this.RED_COLORS[0], this.RED_COLORS[1], this.RED_COLORS[2]];
 
       this.taskManager = taskManager;
@@ -38,14 +38,6 @@ class MatrixBuilder {
     getRandomGreenColor() {    
         const randomIndex = Math.floor(Math.random() * this.GREEN_COLORS.length);
         return this.GREEN_COLORS[randomIndex];
-
-    //   const greenHue = Math.floor(Math.random() * 81) + 80;
-    //   const saturation = Math.floor(Math.random() * 21) + 80;
-    //   const saturation = 50;
-    //   const saturation = Math.floor(Math.random() * 21) + 80;
-    //   const lightness = 50;
-    //   const lightness = Math.floor(Math.random() * 21) + 40;
-    //   return `hsl(${greenHue}, ${saturation}%, ${lightness}%)`;
     }
   
     getRandomRedColor(isRipe) {
@@ -55,18 +47,8 @@ class MatrixBuilder {
       }
   
       const randomIndex = Math.floor(Math.random() * this.RED_COLORS.length);
-      return this.RED_COLORS[randomIndex];
-        
-        // let redHue;
-        // if (Math.random() < this.RIPE_LIMIT) {
-        //   redHue = Math.floor(Math.random() * 51) + 150;
-        // } else {
-        //   redHue = Math.floor(Math.random() * 21) + 340;
-        // }
-        // const saturation = 50;
-        // const lightness = 50;
-        // return `hsl(${redHue}, ${saturation}%, ${lightness}%)`;
-      }
+      return this.RED_COLORS[randomIndex];   
+    }
   
     drawMatrix(setEventListeners) {
         const totalSquares = this.NUM_ROWS * this.NUM_COLS;

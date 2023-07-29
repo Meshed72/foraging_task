@@ -39,7 +39,7 @@ canvas {
 }
 
 .progress-bar {
-  width: 500px;
+  width: 1000px;
   height: 20px;
   background-color: black;
   margin: 10px auto;
@@ -49,7 +49,6 @@ canvas {
 .progress-fill {
   height: 100%;
   background-color: rgb(255, 255, 0);
-  transition: width 30s linear;    
 }
 
 .buttons-container {
@@ -66,6 +65,8 @@ canvas {
   border-radius: 5px;
   cursor: pointer;
   display: none;
+  margin-left: auto;
+  margin-right: auto
 }  
 
 .start-task-button {
