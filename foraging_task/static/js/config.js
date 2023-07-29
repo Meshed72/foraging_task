@@ -21,7 +21,7 @@ const TaskParams = {
         "#00AF00"
       ],
 	SQUARE_SIZE: 20, // pixels
-	BERRIES_PROP: 0.1, // Proportion of berries out of total squares
+	BERRIES_PROP: 0.2, // Proportion of berries out of total squares
 	RIPE_PROP: 0.5, // Proportion of ripe berries out of total berries
 	PICK_DELAY: 100, // ms 
 	// TRAVEL_TIME: 10, // seconds - should be configured in css file
