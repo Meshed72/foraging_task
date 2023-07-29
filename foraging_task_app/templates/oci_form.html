@@ -7,7 +7,7 @@
 <head>
     <title>Questionnaire</title>
 </head>
-<body>
+<body onload="initQuiestionnaire()">
     <h1>Questionnaire</h1>
     <div class="instructions">
         <p>    
@@ -43,21 +43,7 @@
         </p>
         <button type="submit" class="submit-button">Next</button>
     </form>
-
-    <script>
-        document.querySelector("[name=subject_id]").value = sessionStorage.getItem("PROLIFIC_PID");
-
-        // Set all radio boxes to have no value selected
-        const radioBoxes = document.querySelectorAll('input[type="radio"]');
-        radioBoxes.forEach(radio => {
-            radio.checked = false;
-            radio.addEventListener('click', (event) => {
-                const item = event.target.name;
-                const value = event.target.value;    
-                // Update the value of the clicked radio button
-                document.querySelector(`input[name="${item}"][value="${value}"]`).checked = true;            
-            });
-        });
-    </script>
 </body>
 </html>
+
+<script src="{% static 'js/ExperimentManager.js' %}"></script>

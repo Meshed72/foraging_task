@@ -14,3 +14,29 @@ class ExperimentManager{
         sessionStorage.setItem("SESSION_ID", "SESSION_ID");
     }
 }
+
+function goToQuestionnaire(){
+    window.location.href = "/questionnaire_form"
+}
+
+function initQuiestionnaire(){
+    document.querySelector("[name=subject_id]").value = sessionStorage.getItem("PROLIFIC_PID");
+
+    // Set all radio boxes to have no value selected
+    const radioBoxes = document.querySelectorAll('input[type="radio"]');
+    radioBoxes.forEach(radio => {
+        radio.checked = false;
+        radio.addEventListener('click', (event) => {
+            const item = event.target.name;
+            const value = event.target.value;    
+            // Update the value of the clicked radio button
+            document.querySelector(`input[name="${item}"][value="${value}"]`).checked = true;            
+        });
+    });
+}
+
+function initTask(){
+    document.querySelector('.circle').style.display = "none";
+    taskManager = new TaskManager()
+    taskManager.init();
+  }

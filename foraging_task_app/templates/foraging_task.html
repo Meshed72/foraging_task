@@ -43,14 +43,6 @@
 </body>
 </html>
 
-<script>
-  function initTask(){
-    document.querySelector('.circle').style.display = "none";
-    taskManager = new TaskManager()
-    taskManager.init();
-  }
-</script>
-
 <audio id="errorSound" src="{% static 'sounds/error.mp3' %}"></audio>
 <audio id="correctSound" src="{% static 'sounds/correct.wav' %}"></audio>
 <audio id="neutralSound" src="{% static 'sounds/neutral.wav' %}"></audio>
@@ -58,3 +50,4 @@
 <script src="{% static 'js/config.js' %}"></script>
 <script src="{% static 'js/TaskManager.js' %}"></script>
 <script src="{% static 'js/MatrixBuilder.js' %}"></script>
+<script src="{% static 'js/ExperimentManager.js' %}"></script>
