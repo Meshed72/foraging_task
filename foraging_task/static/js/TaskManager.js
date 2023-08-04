@@ -55,8 +55,9 @@ class TaskManager{
     }
 
     endTask(){
-        this.taskElementsVisibility("taskEnd");
+        // this.taskElementsVisibility("taskEnd");        
         this.reportTaskData();
+        window.location.href = "/oci_questionnaire"
     }
 
     taskElementsVisibility(phase){

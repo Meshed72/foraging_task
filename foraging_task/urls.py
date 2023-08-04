@@ -15,11 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from foraging_task_app.views import foraging_task, report_task_data, questionnaire_form, welcome_screen
+from foraging_task_app.views import foraging_task, report_task_data, oci_questionnaire, dass_questionnaire, aaq_questionnaire, welcome_screen
 
 urlpatterns = [    
     path('', welcome_screen, name='welcome_screen'),
-    path('questionnaire_form', questionnaire_form, name='questionnaire_form'),
+    path('oci_questionnaire', oci_questionnaire, name='oci_questionnaire'),
+    path('dass_questionnaire', dass_questionnaire, name='dass_questionnaire'),
+    path('aaq_questionnaire', aaq_questionnaire, name='aaq_questionnaire'),
     path('foraging_task', foraging_task, name='foraging_task'),
     path('report_task_data', report_task_data, name='report_task_data'),
 ]

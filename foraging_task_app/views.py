@@ -5,25 +5,49 @@ from django.http import HttpResponseRedirect
 import json
 from .models import Task_clicks, Subjects
 import pdb
-from .forms import Oci_questionnaire_form
+from .forms import Oci_questionnaire_form, Dass_questionnaire_form, Aaq_questionnaire_form
 
 def welcome_screen(request):
     return render(request, 'welcome_screen.html')
 
-def questionnaire_form(request):
+def foraging_task(request):
+    return render(request, 'foraging_task.html')
+
+def oci_questionnaire(request):
     form = Oci_questionnaire_form(request.POST)    
+    if request.method == 'POST':             
+            if form.is_valid():
+                form.save()            
+                return HttpResponseRedirect('/dass_questionnaire')
+    else:
+        form = Oci_questionnaire_form()
+
+    return render(request, 'questionnaire_form.html', {'form': form,
+                                                       'form_name' : 'oci'})
+
+def dass_questionnaire(request):
+    form = Dass_questionnaire_form(request.POST)    
+    if request.method == 'POST':             
+            if form.is_valid():
+                form.save()            
+                return HttpResponseRedirect('/aaq_questionnaire')
+    else:
+        form = Dass_questionnaire_form()
+
+    return render(request, 'questionnaire_form.html', {'form': form,
+                                                       'form_name' : 'dass'})
+
+def aaq_questionnaire(request):
+    form = Aaq_questionnaire_form(request.POST)    
     if request.method == 'POST':             
             if form.is_valid():
                 form.save()            
                 return HttpResponseRedirect('/foraging_task')
     else:
-        form = Oci_questionnaire_form()
+        form = Aaq_questionnaire_form()
 
-    return render(request, 'oci_form.html', {'form': form})
-
-
-def foraging_task(request):
-    return render(request, 'foraging_task.html')
+    return render(request, 'questionnaire_form.html', {'form': form,
+                                                       'form_name' : 'aaq'})
 
 @csrf_exempt
 def report_task_data(request):    

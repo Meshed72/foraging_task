@@ -11,11 +11,11 @@ class ExperimentManager{
     }
 }
 
-function goToQuestionnaire(){
-    window.location.href = "/questionnaire_form"
+function navigateTo(page){
+    window.location.href = "/" + page
 }
 
-function initQuiestionnaire(){
+function initQuiestionnaire(name){
     document.querySelector("[name=subject_id]").value = sessionStorage.getItem("PROLIFIC_PID");
 
     // Set all radio boxes to have no value selected
@@ -29,6 +29,19 @@ function initQuiestionnaire(){
             document.querySelector(`input[name="${item}"][value="${value}"]`).checked = true;            
         });
     });
+
+    document.getElementById("oci_instructions").style.display = "none";
+    document.getElementById("dass_instructions").style.display = "none";
+    document.getElementById("aaq_instructions").style.display = "none";
+
+    var intructionsText;
+    if(name == 'oci'){
+        document.getElementById("oci_instructions").style.display = "block";                
+    } else if(name == 'dass'){
+        document.getElementById("dass_instructions").style.display = "block";
+    } else if(name == 'aaq'){
+        document.getElementById("aaq_instructions").style.display = "block";
+    }
 }
 
 function initTask(){
