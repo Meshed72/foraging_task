@@ -25,5 +25,5 @@ const TaskParams = {
 	RIPE_PROP: 0.5, // Proportion of ripe berries out of total berries
 	PICK_DELAY: 100, // ms 
 	// TRAVEL_TIME: 10, // seconds - should be configured in css file
-	TOTAL_DURATION: 60 // seconds
+	TOTAL_DURATION: 600 // seconds
 }
