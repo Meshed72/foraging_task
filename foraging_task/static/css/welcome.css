@@ -12,3 +12,7 @@
     margin: 0 auto;
     font-size: larger;
   }
+
+  .center{
+    text-align: center;
+  }

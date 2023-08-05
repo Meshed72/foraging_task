@@ -10,6 +10,9 @@ from .forms import Oci_questionnaire_form, Dass_questionnaire_form, Aaq_question
 def welcome_screen(request):
     return render(request, 'welcome_screen.html')
 
+def finish_screen(request):
+    return render(request, 'finish_screen.html')
+
 def foraging_task(request):
     return render(request, 'foraging_task.html')
 
@@ -42,7 +45,7 @@ def aaq_questionnaire(request):
     if request.method == 'POST':             
             if form.is_valid():
                 form.save()            
-                return HttpResponseRedirect('/foraging_task')
+                return HttpResponseRedirect('/finish_screen')
     else:
         form = Aaq_questionnaire_form()
 
