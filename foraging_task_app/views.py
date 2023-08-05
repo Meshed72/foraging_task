@@ -66,6 +66,8 @@ def report_task_data(request):
                         is_ripe=click["isRipe"],
                         x=click["x"],
                         y=click["y"],
+                        is_green=click["isGreen"],
+                        color=click["color"],
                         patch_number=click["patchNumber"])
         t.save()
     

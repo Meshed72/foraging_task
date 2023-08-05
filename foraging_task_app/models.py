@@ -17,7 +17,9 @@ class Task_clicks(models.Model):
     patch_number = models.IntegerField()
     x = models.IntegerField()
     y = models.IntegerField()
-    is_ripe = models.BooleanField()
+    is_ripe = models.BooleanField(default='False')
+    is_green = models.BooleanField(default='False')
+    color = models.CharField(max_length=30, default='NA')
     
     class Meta:
         db_table  = 'task_clicks'
@@ -86,7 +88,7 @@ class Dass_questionnaire(models.Model):
         "question_1" : "1. I found it hard to wind down",
         "question_2" : "2. I was aware of dryness of my mouth",
         "question_3" : "3. I couldn’t seem to experience any positive feeling at all",
-        "question_4" : "4. I experienced breathing difficulty (e.g. excessively rapid breathing, breathlessness in the absence of physical exertion)",
+        "question_4" : "4. I experienced breathing difficulty\n(e.g. excessively rapid breathing, breathlessness in the absence of physical exertion)",
         "question_5" : "5. I found it difficult to work up the initiative to do things",
         "question_6" : "6. I tended to over-react to situations",
         "question_7" : "7. I experienced trembling (e.g. in the hands)",
@@ -101,7 +103,7 @@ class Dass_questionnaire(models.Model):
         "question_16" : "16. I was unable to become enthusiastic about anything",
         "question_17" : "17. I felt I wasn’t worth much as a person",
         "question_18" : "18. I felt that I was rather touchy",
-        "question_19" : "19. I was aware of the action of my heart in the absence of physical exertion (e.g. sense of heart rate increase, heart missing a beat)",
+        "question_19" : "19. I was aware of the action of my heart in the absence of physical exertion\n(e.g. sense of heart rate increase, heart missing a beat)",
         "question_20" : "20. I felt scared without any good reason",
         "question_21" : "21. I felt that life was meaningless"
     }

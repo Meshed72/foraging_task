@@ -149,6 +149,7 @@ class MatrixBuilder {
         var clickX = event.clientX - rect.left;
         var clickY = event.clientY - rect.top;
         var isRipe = false;
+        var isGreen = false;
         var squareColor;
   
         squares.forEach((square) => {
@@ -159,26 +160,26 @@ class MatrixBuilder {
             clickY < square.y + square.size
           ) {
 
-            squareColor = square.color;
-
-            if(ripeColors.includes(square.color)){
-                isRipe = true;
-            }
+            isRipe = ripeColors.includes(square.color);
+            isGreen = matrixBuilder.GREEN_COLORS.includes(square.color);
             
-            if(matrixBuilder.RED_COLORS.includes(squareColor)){
+            squareColor = square.color;                            
+            if(matrixBuilder.RED_COLORS.includes(square.color)){
               square.color = matrixBuilder.getRandomGreenColor();        
             }
             
             ctx.fillStyle = square.color;
-            ctx.fillRect(square.x, square.y, square.size, square.size);
-    
+            ctx.fillRect(square.x, square.y, square.size, square.size);                        
+
             // Update click data
             taskManager.updateClickData({ subjectId : taskManager.subjectId, 
                 clickTime : Date.now(), 
                 patchNumber : taskManager.currentPatch, 
                 x: square.x, 
                 y: square.y, 
-                isRipe : isRipe});
+                color: square.color,
+                isRipe : isRipe,
+                isGreen: isGreen});
           }
         });
   

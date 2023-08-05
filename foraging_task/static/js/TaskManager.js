@@ -107,7 +107,7 @@ class TaskManager{
             this.isValid = 1;            
             this.endTask();
         } else {
-            this.currentFillWidth  += fillWidthUnit;
+            this.currentFillWidth += fillWidthUnit;
             this.progressFill.style.width = `${this.currentFillWidth}px`;
         }
     }
